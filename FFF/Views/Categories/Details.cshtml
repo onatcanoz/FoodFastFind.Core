@@ -1,0 +1,32 @@
+﻿@model CategoryModel
+
+@{
+    ViewData["Title"] = "Category's Details";
+}
+
+<h1>@ViewBag.Title</h1>
+
+<div>
+    <h4>Director</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FoodsText)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.FoodsText)
+        </dd>
+
+    </dl>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

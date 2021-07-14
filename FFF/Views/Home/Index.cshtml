@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="jumbotron"><h1>Welcome @User.Identity.Name to FoodLand!</h1></div>
+}
+else
+{
+    <div class="jumbotron"><h1>Welcome to FoodLand</h1></div>
+}

@@ -1,0 +1,86 @@
+﻿@using MvcWebUI.Settings
+@model FoodModel
+
+@{
+    ViewData["Title"] = "Create Food";
+}
+
+<h1>Create Food</h1>
+
+<h4>Food</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+
+        <form asp-action="Create" autocomplete="off" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories">
+                    <option value=""> -- Select -- </option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Detail" class="control-label"></label>
+                <textarea asp-for="Detail" class="form-control"></textarea>
+                <span asp-validation-for="Detail" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="RecipesMaterials" class="control-label"></label>
+                <textarea asp-for="RecipesMaterials" class="form-control"></textarea>
+                <span asp-validation-for="RecipesMaterials" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Image</label>
+                <br />
+                <input type="file" name="image" accept="@AppSettings.AcceptedImageExtensions" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="VideoURL" class="control-label"></label>
+                <input asp-for="VideoURL" class="form-control" />
+                <span asp-validation-for="VideoURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CookTime" class="control-label"></label>
+                <input asp-for="CookTime" class="form-control" />
+                <span asp-validation-for="CookTime" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="PersonNumber" class="control-label"></label>
+                <input asp-for="PersonNumber" class="form-control" />
+                <span asp-validation-for="PersonNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.MaterialsIds, htmlAttributes: new { @class = "col-form-label col-md-2" })
+                <div class="form-group">
+                    @Html.ListBoxFor(model => model.MaterialsIds, ViewBag.Materials as MultiSelectList, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MaterialsIds, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to Food List</a>
+</div>
+

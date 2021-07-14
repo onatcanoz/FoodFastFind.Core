@@ -1,0 +1,82 @@
+﻿@model IEnumerable<CategoryModel>
+
+@{
+    ViewData["Title"] = "Category List";
+}
+
+<h1>@ViewBag.Title</h1>
+
+<p>
+    <a asp-action="Create">Create New Category</a>
+</p>
+<table id="category" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().FoodsText)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @foreach (FoodModel food in Model.SelectMany(i => i.Foods).ToList().Where(i => i.CategoryId == item.Id))
+                    {
+                        if (food != null)
+                        {
+                            <a asp-controller="Foods" asp-action="Details" asp-route-id="@food.Id">@food.Name </a>
+                            @*<iframe width="420" height="315" src="@food.VideoURL"></iframe>
+                                <img width="420" height="315" src="@food.PhotoURL"/>*@
+                        }
+                    }
+                </td>
+
+
+                <td>
+
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit </a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a href="#" onclick="deleteCategory(@item.Id);">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@section Scripts
+{
+    <link href="~/lib/datatables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/datatables.js"></script>
+    <link href="~/lib/AlertifyJS/css/alertify.min.css" rel="stylesheet" />
+    <script src="~/lib/AlertifyJS/alertify.min.js"></script>
+    <script>
+        $('#category').DataTable();
+    </script>
+    <link href="https://cdn.datatables.net/v/bs-3.3.7/jq-2.2.4/jszip-3.1.3/pdfmake-0.1.27/dt-1.10.15/b-1.3.1/b-html5-1.3.1/b-print-1.3.1/r-2.1.1/rg-1.0.0/datatables.min.css%22/%3E
+    <script src="https://cdn.datatables.net/v/bs-3.3.7/jq-2.2.4/jszip-3.1.3/pdfmake-0.1.27/dt-1.10.15/b-1.3.1/b-html5-1.3.1/b-print-1.3.1/r-2.1.1/rg-1.0.0/datatables.min.js%22%3E</script>
+}
+
+<script>
+    function deleteCategory(id) {
+        alertify.confirm("Warning!", "Gerçekten şırdan yemek istiyor musunuz??",
+            function () {
+                window.location.href = "/Categories/Delete/" + id;
+            },
+            function () {
+                alertify.error("!!")
+                window.location.href = "/Categories/Index";
+            }
+        );
+    }
+</script>

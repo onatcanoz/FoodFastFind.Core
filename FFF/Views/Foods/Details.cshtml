@@ -1,0 +1,81 @@
+﻿@model FoodModel
+
+@{
+    ViewData["Title"] = "Detail's Food";
+}
+
+<h1>@ViewBag.Title</h1>
+
+<div>
+    <h4>Food</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Detail)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Detail)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RecipesMaterials)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RecipesMaterials)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PhotoURL)
+        </dt>
+        <dd class="col-sm-10">
+            @if (!string.IsNullOrWhiteSpace(Model.PhotoURL))
+            {
+                <img style="width: 350px" src="/files/foods/@Model.PhotoURL" class="img-fluid" />
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.VideoURL)
+        </dt>
+        <dd class="col-sm-10">
+            <iframe width="350px" height="200" source src="@Model.VideoURL" title="Youtube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </dd>
+        @*<dd class="col-sm-10">
+                <a href="@Model.VideoURL" target="_blank">İzlemek için tıklayınız..</a>
+            </dd>*@
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CookTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CookTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PersonNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PersonNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.MaterialText)
+        </dt>
+
+        <dd class="col-sm-10">
+            @Html.Raw(Model.MaterialText)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

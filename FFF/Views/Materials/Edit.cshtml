@@ -1,0 +1,45 @@
+﻿
+@using Microsoft.AspNetCore.Razor.Language.Intermediate
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model MaterialModel
+
+@{
+    ViewData["Title"] = "Edit";
+    var secili = false;
+
+}
+
+<h1>Edit</h1>
+
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.Id)
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>Material</h4>
+        <hr />
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <form asp-action="Edit">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+}
+
