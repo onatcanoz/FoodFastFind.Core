@@ -11,91 +11,92 @@
 </p>
 <table id="foods" class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Detail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RecipesMaterials)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhotoURL)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VideoURL)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CookTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PersonNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaterialsIds)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Detail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecipesMaterials)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhotoURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VideoURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CookTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaterialsIds)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Detail)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RecipesMaterials)
-                </td>
-                <td>
-                    @if (!string.IsNullOrWhiteSpace(item.PhotoURL))
-                    {
-                        <img src="/files/foods/@item.PhotoURL" class="img-thumbnail" />
-                    }
-                </td>
-                <td>
-                    <iframe width="90px" height="55px" source src="@item.VideoURL" title="Youtube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </td>
-                @*<td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Detail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecipesMaterials)
+            </td>
+            <td>
+                @if (!string.IsNullOrWhiteSpace(item.PhotoURL))
+                {
+                    <img src="/files/foods/@item.PhotoURL" class="img-thumbnail" />
+                }
+            </td>
+            <td>
+                <iframe width="90px" height="55px" source src="@item.VideoURL" title="Youtube" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </td>
+            @*<td>
                     <a href="@item.VideoURL" target="_blank">İzlemek için tıklayınız</a>
                 </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.CookTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PersonNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category.Name)
-                </td>
-                <td>
-                    @{
-                        string materialsAll = "";
-                        foreach (MaterialModel material in item.Materials)
-                        {
-                            materialsAll += "<i>" + material.Name + "</i><br/>";
-                        }
-                        @Html.Raw(materialsAll)
-
+            <td>
+                @Html.DisplayFor(modelItem => item.CookTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @{
+                    string materialsAll = "";
+                    foreach (MaterialModel material in item.Materials)
+                    {
+                        materialsAll += "<i>" + material.Name + "</i><br/>";
                     }
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a href="#" onclick="deleteFood(@item.Id);">Delete</a>
-                </td>
-            </tr>
-        }
+                    @Html.Raw(materialsAll)
+
+                }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a href="#" onclick="deleteFood(@item.Id);">Delete</a>
+            </td>
+        </tr>
+    }
     </tbody>
 </table>
+
 @section Scripts
 {
     <link href="~/lib/datatables/css/jquery.dataTables.min.css" rel="stylesheet" />
